@@ -8,3 +8,4 @@ Route::get('/', function () {
 });
 
 Route::get('/sensor/{id}', [SensorController::class, 'index']);
+Route::get('/sensor/{id}', [SensorController::class, 'create']);

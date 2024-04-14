@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Sensor;
 
 use App\Http\Controllers\Controller;
-use App\Models\Sensor;
+use App\Models\Sensor\Sensor;
 use Illuminate\Http\Request;
 
 class SensorController extends Controller
@@ -13,8 +13,10 @@ class SensorController extends Controller
      */
     public function index()
     {
+        $sensorList = Sensor::all();
         return response()->json([
             'message' => 'sensor has been retrieved',
+            'data' => $sensorList,
         ]);
     }
 
@@ -23,7 +25,14 @@ class SensorController extends Controller
      */
     public function create()
     {
-        //
+        $newSensor = new Sensor();
+        $newSensor->name = "sensor name";
+        $newSensor->status = "online";
+        $newSensor->save();
+
+        return response()->json([
+            'message' => 'sensor has been created',
+        ]);
     }
 
     /**

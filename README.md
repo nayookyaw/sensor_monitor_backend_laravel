@@ -23,6 +23,7 @@ Navigate to project root folder and run below command <br>
 - PHP Intelephense
 - Porifa.laravel-intelephense
 - amiralizadeh9480.laravel-extra-intellisense
+- SonarSource.sonarlint-vscode
 
 * PHPStan (type checker) <br>
 https://marketplace.visualstudio.com/items?itemName=swordev.phpstan <br>
