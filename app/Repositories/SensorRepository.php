@@ -12,15 +12,15 @@ class SensorRepository implements SensorRepositoryInterface
     }
 
     public function getById($id){
-       return Sensor::findOrFail($id);
+       return Sensor::find($id);
     }
 
-    public function store(array $data){
-       return Sensor::create($data);
+    public function create(Sensor $newSensor){
+       return $newSensor->save();
     }
 
-    public function update(array $data,$id){
-       return Sensor::whereId($id)->update($data);
+    public function update(Sensor $updateSensor) {
+       return $updateSensor->save();
     }
     
     public function delete($id){

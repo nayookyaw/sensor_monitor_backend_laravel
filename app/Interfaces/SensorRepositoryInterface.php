@@ -2,11 +2,13 @@
 
 namespace App\Interfaces;
 
+use App\Models\Sensor;
+
 interface SensorRepositoryInterface
 {
     public function index();
     public function getById($id);
-    public function store(array $data);
-    public function update(array $data,$id);
+    public function create(Sensor $newSensor);
+    public function update(Sensor $updateSensor);
     public function delete($id);
 }

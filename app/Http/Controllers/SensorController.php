@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classes\ApiResponseClass;
+use App\Http\Requests\CreateSensorRequest;
 use App\Models\Sensor;
 use App\Http\Requests\StoreSensorRequest;
 use App\Http\Requests\UpdateSensorRequest;
@@ -20,9 +21,9 @@ class SensorController extends Controller
 
     public function index()
     {
-        $data = $this->sensorRepositoryInterface->index();
+        $sensorList = $this->sensorRepositoryInterface->index();
 
-        return ApiResponseClass::sendResponse(SensorResource::collection($data),'',200);
+        return ApiResponseClass::sendResponse(SensorResource::collection($sensorList),'',200);
     }
 
     /**
@@ -36,9 +37,15 @@ class SensorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSensorRequest $request)
+    public function store(StoreSensorRequest $createSensor)
     {
-        //
+        $newSensor = new Sensor();
+        $newSensor->name = $createSensor->name;
+        $newSensor->details = $createSensor->details;
+
+        $this->sensorRepositoryInterface->create($newSensor);
+
+        return ApiResponseClass::sendResponse(null,'new sensor has been stored',200);
     }
 
     /**
@@ -60,9 +67,18 @@ class SensorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSensorRequest $request, Sensor $sensor)
+    public function update(UpdateSensorRequest $request, $sensorId)
     {
-        //
+        $existingSensor = $this->sensorRepositoryInterface->getById($sensorId);
+        if ($existingSensor) {
+            $existingSensor->name = $request->name;
+            $existingSensor->details = $request->details;
+            $this->sensorRepositoryInterface->update($existingSensor);
+
+            return ApiResponseClass::sendResponse(null,'sensor has been updated',200);
+        } else {
+            return ApiResponseClass::sendResponse(null,'error in sensor update',500);
+        }
     }
 
     /**
