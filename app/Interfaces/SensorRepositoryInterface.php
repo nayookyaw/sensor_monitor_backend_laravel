@@ -7,8 +7,8 @@ use App\Models\Sensor;
 interface SensorRepositoryInterface
 {
     public function index();
-    public function getById($id);
+    public function getById(int $id);
     public function create(Sensor $newSensor);
     public function update(Sensor $updateSensor);
-    public function delete($id);
+    public function delete(int $id);
 }

@@ -9,6 +9,7 @@ use App\Http\Requests\StoreSensorRequest;
 use App\Http\Requests\UpdateSensorRequest;
 use App\Http\Resources\SensorResource;
 use App\Interfaces\SensorRepositoryInterface;
+use Exception;
 
 class SensorController extends Controller
 {
@@ -51,9 +52,18 @@ class SensorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Sensor $sensor)
+    public function show(int $sensorId)
     {
-        //
+        try {
+            $sensor = $this->sensorRepositoryInterface->getById($sensorId);
+            if ($sensor) {
+                return ApiResponseClass::sendResponse($sensor, 'sensor has be retrieved', 200);
+            } else {
+                return ApiResponseClass::sendResponse(null,'no data', 200);
+            }
+        } catch (Exception $e) {
+            return ApiResponseClass::sendResponse(null, $e->getMessage(),500);
+        }
     }
 
     /**
@@ -67,7 +77,7 @@ class SensorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSensorRequest $request, $sensorId)
+    public function update(UpdateSensorRequest $request, int $sensorId)
     {
         $existingSensor = $this->sensorRepositoryInterface->getById($sensorId);
         if ($existingSensor) {

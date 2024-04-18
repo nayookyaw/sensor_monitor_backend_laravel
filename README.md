@@ -35,3 +35,6 @@ https://www.fastcomet.com/kb/laravel-shared-hosting-routes-not-working-properly 
 
 # References
 https://medium.com/@1415sandalanka/laravel-11-rest-api-crud-with-best-practices-fcc26505e0d2 <br>
+
+* setup and deploy with docker container
+https://medium.com/@asia.joumaa/deploy-a-laravel-app-into-a-docker-container-af96ac58411d <br>

@@ -11,7 +11,7 @@ class SensorRepository implements SensorRepositoryInterface
         return Sensor::all();
     }
 
-    public function getById($id){
+    public function getById(int $id){
        return Sensor::find($id);
     }
 
@@ -23,7 +23,7 @@ class SensorRepository implements SensorRepositoryInterface
        return $updateSensor->save();
     }
     
-    public function delete($id){
+    public function delete(int $id){
         Sensor::destroy($id);
     }
 }
